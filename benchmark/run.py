@@ -23,7 +23,7 @@ def main():
 def main2():
     with ProcessPoolExecutor(max_workers=15) as executor:
         future_to_result = {executor.submit(
-            runTest, value, key): key for (key, value) in cmds.items()}
+            runTest, *(value, key)): key for (key, value) in cmds.items()}
 
         for future in concurrent.futures.as_completed(future_to_result):
             try:
